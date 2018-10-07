@@ -1,0 +1,55 @@
+<div class="row"> 
+    <div class="col-lg-5 ">
+        <div class="card">               
+            <div class="card-body shadow">
+                <div class="d-flex">    
+                    <h3 class="card-title m-b-5 text-center">
+                        <span class="lstick"></span>Earnings
+                    </h3>
+                    <div class="pull-right">
+                     <!-- Cualquiera cosa -->
+                    </div>                                  
+                </div>  
+                <form class="form-material m-t-40"  #formItem="ngForm"  >
+                    <div class="col-md-12  col-sm-12" >                                                
+                        <div class="form-group" >   
+                            <label class="label-title" for="ganancia_vinil">Gain per Inch</label>                      
+                            <input type="number" id="ganancia_vinil" class="form-control m-b-0"  [(ngModel)]="ganancia_vinil"     [ngModelOptions]="{standalone: true}" > <span>%</span>
+                            <button type="button" class="btn btn-success btn-circle" (click)="onSubmiteGain()">
+                                <i class="fa fa-check"></i>
+                            </button>
+                         </div>                      
+                    </div>                 
+                </form>
+            </div>
+       </div>          
+   </div>
+
+
+
+    <div class="col-lg-6">
+        <div class="card">                
+            <div class="card-body shadow">
+                <div class="d-flex">    
+                    <h3 class="card-title m-b-5 text-center">
+                        <span class="lstick"></span>Overhead
+                    </h3>
+                    <div class="pull-right">
+                        <!-- Cualquiera cosa -->
+                    </div>                                  
+                </div>      
+                <form class="form-material m-t-40"  #formItem="ngForm"  >
+                        <div class="col-lg-12  col-sm-12" >                                                
+                            <div class="form-group" *ngFor="let item of items">   
+                                <label class="label-title" for="ganancia_vinil">{{item.name}}</label>                      
+                                <input type="number" id="ganancia_vinil" class="form-control m-b-0"  [(ngModel)]="item.price"     [ngModelOptions]="{standalone: true}" >
+                             </div>                      
+                        </div>                 
+                    </form>                                
+                              
+             </div>
+        </div>
+    </div>
+
+</div>
+
