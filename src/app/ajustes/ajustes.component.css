@@ -1,3 +1,9 @@
+::ng-deep :root {
+  --width: 5%;
+}
+
+
+
 
 .d-flex{
     display: flex;
@@ -21,6 +27,67 @@
     align-items: 'center';
     padding: 10px;
   }
+
+  .table-col-1{
+    width: var(--width);
+  }
+  .table-col-2{
+    width: calc(var(--width) * 2);
+  }
+  .table-col-3{
+    width: calc(var(--width) * 3);
+  }
+  .table-col-4{
+    width: calc(var(--width) * 4);
+  }
+
+  .info-modal{
+    font-weight: 400;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+}
+
+.modal-footer-s{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-end;
+    align-items: center;
+    justify-content: flex-end;   
+    max-height: 5rem;
+    border-top: 1px solid rgb(223, 220, 220); 
+    padding: 2rem;
+}
+
+.title-modal-plan{
+  font-weight: 600!important;
+  font-size: 1.2rem;
+}
+
+.title-modal{
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.modal-form{
+  display: flex!important;
+  flex-direction: row!important;
+}
+
+.modal-form label{
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.total-overhead{
+  padding-right: 7.5rem;
+  display: flex;
+  justify-content: flex-end
+
+}
+
+
   
   
   
