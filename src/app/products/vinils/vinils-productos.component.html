@@ -1,0 +1,208 @@
+<!-- Overhead Direct -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">                
+            <div class="card-body shadow">
+                <div class="d-flex">    
+                    <h3 class="card-title m-b-5 text-center">
+                        <span class="lstick"></span>Vinils 
+                    </h3>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-info btn-circle btn-lg">
+                            <i class="fa fa-plus" (click)="ModalAddOverhead(contentAdd)"></i>
+                        </button>
+                    </div>                                  
+                </div>    
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">                           
+                            <div class="table-responsive dark col-12">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th class="text-nowrap">Name</th>
+                                            <th>Description</th>
+                                            <th>Dimensions</th>
+                                            <th>Color</th>
+                                            <th>Cost</th>
+                                            <th class="text-nowrap">Income</th>
+                                            <th class="text-nowrap">Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of vinils | async; let i=index">                                       
+                                            <td class="table-col-3">
+                                              {{item.name}}
+                                            </td>
+                                            <td class="table-col-4">
+                                              {{item.description}}
+                                            </td>
+                                            <td class="table-col-1">
+                                                {{item.dimension.width}}x{{item.dimension.heigth}}
+                                            </td>
+                                            <td class="table-col-1">
+                                              {{item.color}}
+                                            </td>
+                                            <td class="table-col-1">
+                                              ${{item.cost}}
+                                            </td>
+                                            <td class="table-col-1">
+                                              {{item.gain_per_inch}}
+                                            </td>
+                                            <td class="table-col-2">
+                                                <button type="button" (click)="ModalEditVinil(contentEdit, item)" class="btn btn-success btn-circle">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" (click)="deteleOverhead(item.id)" class="btn btn-danger btn-circle">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>                                 
+                                    </tbody>                               
+                                </table>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>                              
+             </div>
+        </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  <!-- **************************************** -->
+  <!-- *************** MODALS *****************-->
+  <!-- **************************************** -->
+  
+    <!-- ViewModalAdd Vinil-->
+  
+    <div class="row">
+      <div class="col-lg-12">
+          <ng-template #contentAdd let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                  <h4 class="modal-title title-modal-plan">Add Vinil For Use <span class="title-modal"></span></h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">        
+                  <form class="form-material m-t-40"  #formModalItem="ngForm" >
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-name">Name:</label>                      
+                              <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" [(ngModel)]="addItem.name" >
+                          </div>                      
+                      </div>    
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-name">Description:</label>                      
+                              <input type="text" id="detail-description" class="form-control m-b-0" name="detail-description" [(ngModel)]="addItem.description"   >
+                          </div>                      
+                      </div>   
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-name">Cost:</label>                      
+                              <input type="number" id="detail-cost" class="form-control m-b-0" name="detail-cost" [(ngModel)]="addItem.cost">
+                          </div>                      
+                      </div>      
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-name">Color:</label>                      
+                              <input type="text" id="detail-cost" class="form-control m-b-0" name="detail-cost" [(ngModel)]="addItem.color">
+                          </div>                      
+                      </div>  
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-name">Width:</label>                      
+                              <input type="number" id="detail-cost" class="form-control m-b-0" name="detail-cost" [(ngModel)]="addItem.dimension.width">
+                          </div>                      
+                      </div>          
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-name">Heigth:</label>                      
+                              <input type="number" id="detail-cost" class="form-control m-b-0" name="detail-cost" [(ngModel)]="addItem.dimension.heigth">
+                          </div>                      
+                      </div>    
+                  </form>   
+              </div>
+              <div class="modal-footer-s">
+              
+                  <div class="group-button">
+                      <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+                      <button type="button" class="btn btn-info" (click)="[ c('Close click'), addVinils()]">Add</button>   
+                  </div>   
+      
+              </div>
+          </ng-template>                
+      </div>
+  </div>
+  
+    <!-- ViewModalEdit Vinil-->
+  
+    <div class="row">
+      <div class="col-lg-12">
+          <ng-template #contentEdit let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                  <h4 class="modal-title title-modal-plan">Edit Vinil For Use <span class="title-modal"></span></h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">        
+                  <form class="form-material m-t-40"  #formModalItem="ngForm" >
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-name">Name:</label>                      
+                              <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" [(ngModel)]="editItem.name" >
+                          </div>                      
+                      </div>    
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-description">Description:</label>                      
+                              <input type="text" id="detail-description" class="form-control m-b-0" name="detail-description" [(ngModel)]="editItem.description">
+                          </div>                      
+                      </div>   
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-name">Cost:</label>                      
+                              <input type="number" id="detail-cost" class="form-control m-b-0" name="detail-cost" [(ngModel)]="editItem.cost">
+                          </div>                      
+                      </div>      
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-color">Color:</label>                      
+                              <input type="text" id="detail-color" class="form-control m-b-0" name="detail-color" [(ngModel)]="editItem.color">
+                          </div>                      
+                      </div>  
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-width">Width:</label>                      
+                              <input type="number" id="detail-width" class="form-control m-b-0" name="detail-width" [(ngModel)]="editItem.dimension.width">
+                          </div>                      
+                      </div>          
+                      <div class="col-sm-10" >                                                
+                          <div class="form-group modal-form" >   
+                              <label class="label-title" for="detail-heigth">Heigth:</label>                      
+                              <input type="number" id="detail-heigth" class="form-control m-b-0" name="detail-heigth" [(ngModel)]="editItem.dimension.heigth">
+                          </div>                      
+                      </div>    
+                  </form>   
+              </div>
+              <div class="modal-footer-s">
+              
+                  <div class="group-button">
+                      <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+                      <button type="button" class="btn btn-info" (click)="[ c('Close click'), editVinils()]">Edit</button>   
+                  </div>   
+      
+              </div>
+          </ng-template>                
+      </div>
+  </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,15 +10,26 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './ajustes.component.html',
   styleUrls: ['./ajustes.component.css']
 })
-export class AjustesComponent implements OnInit {
+export class AjustesComponent implements OnInit, DoCheck {
   //Firabase Item
-  public items:any;
+  public direct:any;
+  public indirect:any;
   public ganancia_vinil: any;
+  public ganancia_hour: any;
+  public ganancia_avg:any;
+  public ganancia_overhead:any;
     //Modal
-  closeResult: string;
+  public closeResult: string;
   public itemDetail;
-  public addItem: any
+  public itemDetail2;
+  public addItem: any;  
   public totalOverhead:any;
+  public totalOverheadInd:any;
+  //Total
+  public totalIncome:any;
+  public totalExpense:any;
+  public percentOverhead:any;
+  public percentPerHour:any;
 
 
 
@@ -31,46 +42,82 @@ export class AjustesComponent implements OnInit {
   ngOnInit() {
     this._ajustesService.getGanancia().subscribe((ganancia:any) => {
       this.ganancia_vinil = ganancia.ganancia_vinil;  
+      this.ganancia_hour = ganancia.ganancia_hour;
+      this.ganancia_avg = ganancia.ganancia_avg;
+      this.ganancia_overhead = ganancia.ganancia_overhead;
+    
     });
     this._ajustesService.getOverhead().subscribe((data:any)=>{
-      this.items = data.overheader;
-      this.calOverhead(this.items);
+      this.direct = data.direct;
+      this.indirect = data.indirect;
+      this.calOverhead(this.direct);
+      this.calOverheadInd(this.indirect);
+      this.calPerOverhead();
+      this.calTotalExpense();
+
+     
+      
 
     });   
   }
 
-  onSubmiteGain(){
-    console.log(this.ganancia_vinil)
-      this._ajustesService.updateGanancia(this.ganancia_vinil);
+  ngDoCheck(){
+    this.calTotalIncome();
+    this.calPerHour();
   }
 
+  calPerOverhead(){
+    this.percentOverhead = ((this.totalOverhead.toFixed(2)/this.totalOverheadInd.toFixed(2))*100).toFixed(2);
+    console.log(this.percentOverhead);
+  }
+
+  calTotalExpense(){
+    this.totalExpense = (this.totalOverheadInd + this.totalOverhead).toFixed(2);
+  }
+  
+  calTotalIncome(){
+    this.totalIncome = (this.ganancia_avg -  this.totalExpense).toFixed(2);
+  }
+
+  calPerHour(){
+    let percent = (this.ganancia_hour/100) + 1;
+    this.percentPerHour = ((this.totalOverheadInd  / 240)* percent).toFixed(2);
+  }
+
+  onSubmiteGain(){   
+    this._ajustesService.updateGanancia({
+      ganancia_vinil: this.ganancia_vinil,
+      ganancia_hour: this.ganancia_hour,
+      ganancia_avg: this.ganancia_avg,
+      ganancia_overhead: this.ganancia_overhead
+    });
+  }
+ 
   calOverhead(items){
     this.totalOverhead = 0;
     for(let i=0; i < items.length; i++){
       this.totalOverhead += parseFloat(items[i].cost);
     
-      console.log(this.totalOverhead);
+      // console.log(this.totalOverhead);
     }  
   }
 
-  ModalViewOverhead(content, index){
-    console.log(index)
-    this.itemDetail = [];
-    this.itemDetail = {
-      index,
-      name: this.items[index].name,
-      description: this.items[index].description,
-      cost: this.items[index].cost
+  calOverheadInd(items){
+    this.totalOverheadInd = 0;
+    for(let i=0; i < items.length; i++){
+      this.totalOverheadInd += parseFloat(items[i].cost);    
+      // console.log(this.totalOverheadInd);
+    }  
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
     }
-    // this.itemDetail = item;
-    this.modalService.open(content).result.then(
-      result => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      reason => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      }
-    );  
   }
 
   ModalAddOverhead(content){     
@@ -90,32 +137,99 @@ export class AjustesComponent implements OnInit {
     );  
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
+  //Direct
+
+  ModalViewOverhead(content, index){
+    console.log(index)
+    this.itemDetail = [];
+    this.itemDetail = {
+      index,
+      name: this.direct[index].name,
+      description: this.direct[index].description,
+      cost: this.direct[index].cost
     }
-  }
+    // this.itemDetail = item;
+    this.modalService.open(content).result.then(
+      result => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      reason => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );  
+  } 
 
   updateOverhead(){
-  //  console.log(this.itemDetail);
-   this.items[this.itemDetail.index] = this.itemDetail;
-   this._ajustesService.updateOverhead(this.items);
+   this.direct[this.itemDetail.index] = this.itemDetail;
+   this._ajustesService.updateOverhead({
+      direct: this.direct,
+      indirect: this.indirect
+    });
   }
 
-  addOverhead(){
-    // console.log(this.addItem);
-    this.items.push(this.addItem);
-    this._ajustesService.addOverhead(this.items);
-  }
+  addOverhead(){ 
+    this.direct.push(this.addItem);
+    this._ajustesService.addOverhead({
+     direct: this.direct,
+     indirect: this.indirect
+   });
+  }  
 
   deteleOverhead(index){   
-    this.items.splice(index, index+1)
-    this._ajustesService.updateOverhead(this.items);   
+    this.direct.splice(index, index+1)
+     this._ajustesService.updateOverhead({
+      direct: this.direct,
+      indirect: this.indirect
+    });  
   }
+
+  //Indirect
+
+  ModalViewOverheadIn(contentIn, index){
+    console.log(index)
+    this.itemDetail2 = [];
+    this.itemDetail2 = {
+      index,
+      name: this.indirect[index].name,
+      description: this.indirect[index].description,
+      cost: this.indirect[index].cost
+    }
+    // this.itemDetail = item;
+    this.modalService.open(contentIn).result.then(
+      result => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      reason => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );  
+  } 
+
+  updateOverheadIn(){
+    this.indirect[this.itemDetail2.index] = this.itemDetail2;
+    this._ajustesService.updateOverhead({
+      direct: this.direct,
+      indirect: this.indirect
+    });
+   }
+ 
+   addOverheadIn(){ 
+     this.indirect.push(this.addItem);
+     this._ajustesService.addOverhead({
+      direct: this.direct,
+      indirect: this.indirect
+    });
+   }
+ 
+   deteleOverheadIn(index){   
+     this.indirect.splice(index, index+1)
+     this._ajustesService.updateOverhead({
+      direct: this.direct,
+      indirect: this.indirect
+    });  
+   }
+
+
 
 
 

@@ -1,5 +1,63 @@
-<div class="row"> 
+
+<!-- ============================================================== -->
+<!-- Stats box -->
+<!-- ============================================================== -->
+<div class="row">
     <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/income.png" alt="Income" /></div>
+                    <div class="align-self-center">
+                        <h6 class="text-muted m-t-10 m-b-0">Total Income (USD)</h6>
+                        <h2 class="m-t-0 text-flex">{{totalIncome | currency:'USD'}}</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/expense.png" alt="Income" /></div>
+                    <div class="align-self-center">
+                        <h6 class="text-muted m-t-10 m-b-0">Total Expense (USD)</h6>
+                        <h2 class="m-t-0 text-flex">{{totalExpense | currency:'USD'}}</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/assets.png" alt="Income" /></div>
+                    <div class="align-self-center">
+                        <h6 class="text-muted m-t-10 m-b-0">Percent Overhead</h6>
+                        <h2 class="m-t-0 text-flex">{{percentOverhead}}%</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex no-block">
+                    <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income" /></div>
+                    <div class="align-self-center">
+                        <h6 class="text-muted m-t-10 m-b-0">Cost Per Hour (USD)</h6>
+                        <h2 class="m-t-0 text-flex">{{percentPerHour | currency:'USD'}}</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ganancia -->
+
+
+<div class="row"> 
+    <div class="col-lg-3 ">
         <div class="card">               
             <div class="card-body shadow">
                 <div class="d-flex">    
@@ -24,30 +82,99 @@
             </div>
        </div>          
    </div>
+   <div class="col-lg-3">
+        <div class="card">               
+            <div class="card-body shadow">
+                <div class="d-flex">    
+                    <h3 class="card-title m-b-5 text-center">
+                        <span class="lstick"></span>Cost Per Hour
+                    </h3>
+                    <div class="pull-right">
+                    <!-- Cualquiera cosa -->
+                    </div>                                  
+                </div>  
+                <form class="form-material m-t-40"  #formItem="ngForm"  >
+                    <div class="col-md-12  col-sm-12" >                                                
+                        <div class="form-group" >   
+                            <label class="label-title" for="ganancia_hour">Gain per Hour</label>                      
+                            <input type="number" id="ganancia_hour" class="form-control m-b-0"  [(ngModel)]="ganancia_hour"  [ngModelOptions]="{standalone: true}" > <span>%</span>
+                            <button type="button" class="btn btn-success btn-circle" (click)="onSubmiteGain()">
+                                <i class="fa fa-check"></i>
+                            </button>
+                        </div>                      
+                    </div>                 
+                </form>
+            </div>
+        </div>          
+    </div>
+    <div class="col-lg-3">
+            <div class="card">               
+                <div class="card-body shadow">
+                    <div class="d-flex">    
+                        <h3 class="card-title m-b-5 text-center">
+                            <span class="lstick"></span>Average Income
+                        </h3>
+                        <div class="pull-right">
+                        <!-- Cualquiera cosa -->
+                        </div>                                  
+                    </div>  
+                    <form class="form-material m-t-40"  #formItem="ngForm"  >
+                        <div class="col-md-12  col-sm-12" >                                                
+                            <div class="form-group" >   
+                                <label class="label-title" for="ganancia_avg">Total</label>                      
+                                <input type="number" id="ganancia_avg" class="form-control m-b-0"  [(ngModel)]="ganancia_avg"   [ngModelOptions]="{standalone: true}"> 
+                                <button type="button" class="btn btn-success btn-circle" (click)="onSubmiteGain()">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                            </div>                      
+                        </div>                 
+                    </form>
+                </div>
+            </div>          
+        </div>
+        <div class="col-lg-3">
+            <div class="card">               
+                <div class="card-body shadow">
+                    <div class="d-flex">    
+                        <h3 class="card-title m-b-5 text-center">
+                            <span class="lstick"></span>Fixed Overhead
+                        </h3>
+                        <div class="pull-right">
+                        <!-- Cualquiera cosa -->
+                        </div>                                  
+                    </div>  
+                    <form class="form-material m-t-40"  #formItem="ngForm"  >
+                        <div class="col-md-12  col-sm-12" >                                                
+                            <div class="form-group" >   
+                                <label class="label-title" for="ganancia_overhead">Total</label>                      
+                                <input type="number" id="ganancia_overhead" class="form-control m-b-0"  [(ngModel)]="ganancia_overhead" [ngModelOptions]="{standalone: true}"> <span>%</span>
+                                <button type="button" class="btn btn-success btn-circle" (click)="onSubmiteGain()">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                            </div>                      
+                        </div>                 
+                    </form>
+                </div>
+            </div>          
+        </div>
 </div>
 
+<!-- Overhead Direct -->
+
 <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-12">
         <div class="card">                
             <div class="card-body shadow">
                 <div class="d-flex">    
                     <h3 class="card-title m-b-5 text-center">
-                        <span class="lstick"></span>Overhead
+                        <span class="lstick"></span>Overhead Directs
                     </h3>
                     <div class="pull-right">
                         <button type="button" class="btn btn-info btn-circle btn-lg">
                             <i class="fa fa-plus" (click)="ModalAddOverhead(contentAdd)"></i>
                         </button>
                     </div>                                  
-                </div>      
-                <!-- <form class="form-material m-t-40"  #formItem="ngForm"  >
-                        <div class="col-lg-12  col-sm-12" >                                                
-                            <div class="form-group" *ngFor="let item of items">   
-                                <label class="label-title" for="ganancia_vinil">{{item.name}}</label>                      
-                                <input type="number" id="ganancia_vinil" class="form-control m-b-0"  [(ngModel)]="item.price"     [ngModelOptions]="{standalone: true}" >
-                             </div>                      
-                        </div>                 
-                </form>                                 -->
+                </div>    
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">                           
@@ -62,7 +189,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of items; let i=index">
+                                        <tr *ngFor="let item of direct; let i=index">
                                             <td class="table-col-3">
                                                 {{item.name}}
                                             </td>
@@ -87,7 +214,7 @@
                         </div>
                         <div class="card-footer">                           
                             <div class="total-overhead">
-                                <h3>Total of Overhead: <span>USD${{totalOverhead}}</span> </h3>
+                                <h3>Total: <span>USD${{totalOverhead}}</span></h3>
                             </div>
                         </div>
                     </div>
@@ -97,7 +224,71 @@
     </div>
 </div>
 
-  <!-- ViewModalEdit-->
+
+<!-- Overhead Indirect -->
+
+<div class="row">
+        <div class="col-12">
+            <div class="card">                
+                <div class="card-body shadow">
+                    <div class="d-flex">    
+                        <h3 class="card-title m-b-5 text-center">
+                            <span class="lstick"></span>Overhead Indirect
+                        </h3>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-info btn-circle btn-lg">
+                                <i class="fa fa-plus" (click)="ModalAddOverhead(contentAddIn)"></i>
+                            </button>
+                        </div>                                  
+                    </div>   
+                        <div class="card">
+                            <div class="card-body">                           
+                                <div class="table-responsive dark col-12">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="text-nowrap">Bill</th>
+                                                <th>Description</th>
+                                                <th>Cost</th>
+                                                <th class="text-nowrap">Options</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of indirect; let i=index">
+                                                <td class="table-col-3">
+                                                    {{item.name}}
+                                                </td>
+                                                <td class="table-col-4">
+                                                  {{item.description}}
+                                                </td>
+                                                <td class="table-col-1">
+                                                    USD${{item.cost}}
+                                                </td>
+                                                <td class="table-col-2">
+                                                    <button type="button" (click)="ModalViewOverheadIn(contentIn, i)" class="btn btn-success btn-circle">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button type="button" (click)="deteleOverheadIn(i)" class="btn btn-danger btn-circle">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>                                 
+                                        </tbody>                               
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">                           
+                                <div class="total-overhead">
+                                    <h3>Total: <span>USD${{totalOverheadInd}}</span></h3>
+                                </div>
+                            </div>
+                        </div>                                 
+                 </div>
+            </div>
+        </div>
+    </div>
+
+  <!-- ViewModalEditDirect-->
 
 <div class="row">
     <div class="col-lg-12">
@@ -134,7 +325,7 @@
             
                 <div class="group-button">
                     <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
-                    <button type="button" class="btn btn-info" (click)="[ c('Close click'), updateOverhead()]">Update</button>   
+                    <button type="button" class="btn btn-info" (click)="[ c('Close click'), updateOverhead(i)]">Update</button>   
                 </div>   
     
             </div>
@@ -143,7 +334,53 @@
     </div>
 </div>
 
-  <!-- ViewModalAdd-->
+  <!-- ViewModalEditInDirect-->
+
+  <div class="row">
+        <div class="col-lg-12">
+            <ng-template #contentIn let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title title-modal-plan">Edit Item: <span class="title-modal">{{itemDetail2.name}}</span></h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">        
+                    <form class="form-material m-t-40"  #formModalItem="ngForm"   >
+                        <div class="col-sm-10" >                                                
+                            <div class="form-group modal-form" >   
+                                <label class="label-title" for="detail2-name">Bill:</label>                      
+                                <input type="text" id="detail2-name" class="form-control m-b-0" name="detail2-name" [(ngModel)]="itemDetail2.name" >
+                            </div>                      
+                        </div>    
+                        <div class="col-sm-10" >                                                
+                                <div class="form-group modal-form" >   
+                                    <label class="label-title" for="detail2-description">Description:</label>                      
+                                    <input type="text" id="detail2-description" class="form-control m-b-0" name="detail2-description" [(ngModel)]="itemDetail2.description"   >
+                                </div>                      
+                        </div>   
+                        <div class="col-sm-10" >                                                
+                                <div class="form-group modal-form" >   
+                                    <label class="label-title" for="detail2-cost">Cost:</label>                      
+                                    <input type="number" id="detail2-cost" class="form-control m-b-0" name="detail2-cost" [(ngModel)]="itemDetail2.cost">
+                                </div>                      
+                        </div>                
+                    </form>   
+                </div>
+                <div class="modal-footer-s">
+                
+                    <div class="group-button">
+                        <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+                        <button type="button" class="btn btn-info" (click)="[ c('Close click'), updateOverheadIn()]">Update</button>   
+                    </div>   
+        
+                </div>
+            </ng-template>    
+            
+        </div>
+    </div>
+
+  <!-- ViewModalAdd Direct-->
 
   <div class="row">
         <div class="col-lg-12">
@@ -181,6 +418,51 @@
                     <div class="group-button">
                         <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
                         <button type="button" class="btn btn-info" (click)="[ c('Close click'), addOverhead()]">Add</button>   
+                    </div>   
+        
+                </div>
+            </ng-template>                
+        </div>
+    </div>
+
+      <!-- ViewModalAdd Indirect-->
+
+  <div class="row">
+        <div class="col-lg-12">
+            <ng-template #contentAddIn let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title title-modal-plan">Add Item for Overhead <span class="title-modal"></span></h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">        
+                    <form class="form-material m-t-40"  #formModalItem="ngForm"   >
+                        <div class="col-sm-10" >                                                
+                            <div class="form-group modal-form" >   
+                                <label class="label-title" for="detail-name">Bill:</label>                      
+                                <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" [(ngModel)]="addItem.name" >
+                            </div>                      
+                        </div>    
+                        <div class="col-sm-10" >                                                
+                                <div class="form-group modal-form" >   
+                                    <label class="label-title" for="detail-name">Description:</label>                      
+                                    <input type="text" id="detail-description" class="form-control m-b-0" name="detail-description" [(ngModel)]="addItem.description"   >
+                                </div>                      
+                        </div>   
+                        <div class="col-sm-10" >                                                
+                                <div class="form-group modal-form" >   
+                                    <label class="label-title" for="detail-name">Cost:</label>                      
+                                    <input type="number" id="detail-cost" class="form-control m-b-0" name="detail-cost" [(ngModel)]="addItem.cost">
+                                </div>                      
+                        </div>                
+                    </form>   
+                </div>
+                <div class="modal-footer-s">
+                
+                    <div class="group-button">
+                        <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+                        <button type="button" class="btn btn-info" (click)="[ c('Close click'), addOverheadIn()]">Add</button>   
                     </div>   
         
                 </div>

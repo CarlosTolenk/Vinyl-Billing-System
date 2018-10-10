@@ -30,10 +30,16 @@ export class AjustesService {
   }
 
   public updateGanancia(data: any){
+    return this.firestore.collection('ajustes').doc('ganancia').set(data);
+  }
+
+  public updateGananciaHour(data: any){
     return this.firestore.collection('ajustes').doc('ganancia').set({
-      ganancia_vinil: data
+      ganancia_hour: data
     });
   }
+
+  //Gastos Indirectos
 
   public getOverhead() {
     return this.firestore.collection('ajustes').doc('overhead').valueChanges();
@@ -41,15 +47,18 @@ export class AjustesService {
 
   public updateOverhead(data: any){
     return this.firestore.collection('ajustes').doc('overhead').set({
-      overheader: data
+      direct: data.direct,
+      indirect: data.indirect,
     });
   }
 
   public addOverhead(data: any){
     return this.firestore.collection('ajustes').doc('overhead').set({
-      overheader: data
+      direct: data.direct,
+      indirect: data.indirect,
     });
   }
+
 
   // public totalOverhead = async() => {    
   // this.getOverhead().subscribe((data:any)=>{
