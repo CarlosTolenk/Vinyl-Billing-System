@@ -1,0 +1,13 @@
+.basic-info{
+    padding: 2rem;
+}
+
+.basic-info  > * {
+  padding-bottom: 2rem;
+}
+
+.btn-next{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 3rem;
+}

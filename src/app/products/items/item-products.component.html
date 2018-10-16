@@ -1,0 +1,170 @@
+<!-- Overhead Direct -->
+
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">                
+            <div class="card-body shadow">
+                <div class="d-flex">    
+                    <h3 class="card-title m-b-5 text-center">
+                        <span class="lstick"></span>All Items 
+                        
+                    </h3>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-info btn-circle btn-lg" (click)="addItemProduct()">
+                            <i class="fa fa-plus" ></i>
+                            <!-- (click)="ModalAddOverhead(contentAdd)" -->
+                        </button>
+                    </div>                                  
+                </div>    
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">                            
+                            <form id="filer" class="form-material m-t-40">
+                                <div class="form-group modal-form" > 
+                                    <input  class="form-control m-b-0" type="text" [(ngModel)]="filterQuery" name="search-filer" placeholder="Filter by Name and by Type">
+                                </div>
+                            </form>      
+                            
+                            <div class="table-responsive dark col-12">
+                                <table class="table table-bordered" >
+                                    <thead class="thead-dark">
+                                        <tr>
+                                                <!-- <th><a href (click)="sortTable('name')">Name</a></th> -->
+                                            <th class="text-nowrap" (click)="sortItem('name')">Name
+                                                <i *ngIf="name=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="name=='false'" class="fa fa-sort-down"></i>                                                
+                                            </th>
+                                            <th (click)="sortItem('description')">Description
+                                                <i *ngIf="description=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="description=='false'" class="fa fa-sort-down"></i>
+                                            </th>
+                                            <th (click)="sortItem('model')">Model
+                                                <i *ngIf="model=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="model=='false'" class="fa fa-sort-down"></i>
+                                            </th>
+                                            <th (click)="sortItem('color')" >Color
+                                                <i *ngIf="color=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="color=='false'" class="fa fa-sort-down"></i>
+                                            </th>
+                                            <th (click)="sortItem('size')">Size
+                                                <i *ngIf="size=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="size=='false'" class="fa fa-sort-down"></i>
+                                            </th>
+                                            <th (click)="sortItem('type')" >Type
+                                                <i *ngIf="type=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="type=='false'" class="fa fa-sort-down"></i>
+                                            </th>
+                                            <th (click)="sortItem('cost')">Cost
+                                                <i *ngIf="cost=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="cost=='false'" class="fa fa-sort-down"></i>
+                                            </th>              
+                                            <th (click)="sortItem('price')" >Price
+                                                <i *ngIf="price=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="price=='false'" class="fa fa-sort-down"></i>
+                                            </th>                                  
+                                            <th (click)="sortItem('available')">Available
+                                                <i *ngIf="available=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="available=='false'" class="fa fa-sort-down"></i>
+                                            </th>        
+                                            <th (click)="sortItem('inventary')">Inventary
+                                                <i *ngIf="inventary=='true'" class="fa fa-sort-up"></i>
+                                                <i *ngIf="inventary=='false'" class="fa fa-sort-down"></i>
+                                            </th>                                         
+                                            <th class="text-nowrap">Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- | filter:filterQuery    | paginate: { itemsPerPage: 10, currentPage: p }-->
+                                        <tr *ngFor="let item of data  | filter:filterQuery  | paginate: { itemsPerPage: 10, currentPage: p }  ; let i=index">                                       
+                                            <td class="table-col-2">
+                                              {{item.data.name}}
+                                            </td>
+                                            <td class="table-col-3">
+                                             {{item.data.description}}
+                                            </td>
+                                            <td class="table-col-1">
+                                             {{item.data.model}}
+                                            </td>    
+                                            <td class="table-col-1">
+                                                {{item.data.color}}
+                                            </td>  
+                                            <td class="table-col-1">
+                                                {{item.data.size}}
+                                            </td>  
+                                            <td class="table-col-1">
+                                                {{item.data.type}}
+                                            </td>  
+                                            <td class="table-col-1">
+                                                {{item.data.cost | currency:'USD'}}
+                                            </td>    
+                                            <td class="table-col-1">
+                                                {{item.data.price | currency:'USD'}}
+                                            </td>    
+                                            <td class="table-col-1">
+                                                {{item.data.available}}
+                                            </td>   
+                                            <td class="table-col-1">
+                                                {{item.data.inventary}}
+                                            </td>   
+                                            <td class="table-col-2">
+                                                <button type="button" (click)="editItemProduct(item.id)" class="btn btn-success btn-circle">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" (click)="ModalDeleteItem(contentDelete, item.id)" class="btn btn-danger btn-circle">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>                                 
+                                    </tbody>                
+                                </table>
+                                <div class="footer-table">
+                                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>                              
+             </div>
+        </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  <!-- **************************************** -->
+  <!-- *************** MODALS *****************-->
+  <!-- **************************************** --> 
+
+  
+    <!-- ViewModalDelete Vinil-->
+  
+    <div class="row">
+      <div class="col-lg-12">
+          <ng-template #contentDelete let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                  <h4 class="modal-title title-modal-plan">Delete Item <span class="title-modal"></span></h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">        
+                    <h4 class="modal-title-body">Are you sure you want to delete this element from the database?</h4>
+                    <h6> If you make this option the data can not be recovered</h6>                  
+              </div>
+              <div class="modal-footer-s">
+              
+                  <div class="group-button">
+                      <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+                      <button type="button" class="btn btn-info" (click)="[ c('Close click'), deteleItem()]">Delete</button>   
+                  </div>       
+              </div>
+          </ng-template>                
+      </div>
+  </div>
+
+

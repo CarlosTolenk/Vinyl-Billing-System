@@ -22,6 +22,14 @@ export const Approutes: Routes = [
         path: 'products',
         loadChildren: './products/products.module#ProductsModule'
       },
+      {
+        path: 'billing',
+        loadChildren: './invoicing/invoicing-fac.module#InvoicingModule'
+      },
+      {
+        path: 'tables',
+        loadChildren: './table/tables.module#TablesModule'
+      },
     ]
   },
   {

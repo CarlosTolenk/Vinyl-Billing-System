@@ -11,6 +11,6 @@ export class NgbdCarouselBasicComponentComponent {
     // customize default values of carousels used by this component tree
     config.interval = 10000;
     config.wrap = false;
-    config.keyboard = false;
+    config.keyboard = true;
   }
 }

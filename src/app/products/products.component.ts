@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-products',
@@ -7,8 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor() { }
+  tabItem = []
+
+  constructor() { 
+    this.tabItem = [
+      'Vinils', 'T-shirts', 'Hats'
+    ]
+  }
 
   ngOnInit() { }
+
+  public beforeChange($event: NgbTabChangeEvent) {
+    if ($event.nextId === 'tab-preventchange2') {
+      $event.preventDefault();
+    }
+  }
 
 }

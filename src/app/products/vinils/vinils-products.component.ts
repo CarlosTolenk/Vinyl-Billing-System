@@ -7,11 +7,11 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 
 //Services
 import { AjustesService } from '../../services/ajustes.service';
-import { ProductsService} from '../../services/products.service';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-vinils-products',
-  templateUrl: './vinils-productos.component.html',
+  templateUrl: './vinils-products.component.html',
   styleUrls: ['./vinils-products.component.css']
 })
 export class VinilsProductsComponent implements OnInit {
@@ -64,7 +64,7 @@ export class VinilsProductsComponent implements OnInit {
       let cost_per_in = (item.cost / area);
       console.log('Costo x Inch ' +  cost_per_in);
       console.log('------------------------------');
-      item.gain_per_inch =  (cost_per_in *  this.ganancia_vinil).toFixed(3);
+      item.gain_per_inch =  (cost_per_in * (1+(this.ganancia_vinil/100))).toFixed(4);
       console.log('% Income x Inch ' + this.ganancia_vinil);
       console.log('Costo x Inch With Gain ' +  item.gain_per_inch);      
 

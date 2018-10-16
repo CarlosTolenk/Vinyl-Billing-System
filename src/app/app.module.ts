@@ -12,7 +12,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
-
+import { DataTableModule } from "angular-6-datatable";
 import { FullComponent } from './layouts/full/full.component';
 
 import { NavigationComponent } from './shared/header-navigation/navigation.component';
@@ -52,6 +52,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgbModule.forRoot(),
     RouterModule.forRoot(Approutes),
     PerfectScrollbarModule,
+    DataTableModule,
     AngularFireModule.initializeApp(environment.firebase, 'nico-facturacion'), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

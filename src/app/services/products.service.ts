@@ -13,12 +13,15 @@ export class ProductsService {
     private firestore: AngularFirestore ) { }
 
 
-  //Vinils
+  /************************************
+   ************ VINILS*  **************/ 
+  
+       
+  //Get Vinil
   public getVinils() {
    return this.firestore.collection('vinils').snapshotChanges();
   }
-
-  //Add vinil
+  //Add Vinil
   public addVinil(data) {
     return this.firestore.collection('vinils').add(data);
   }
@@ -26,10 +29,36 @@ export class ProductsService {
   public deleteVinil(id) {
     return this.firestore.collection('vinils').doc(id).delete();
   }
-
+  //Update Vinil
   public updateVinil(data){
     return this.firestore.collection('vinils').doc(data.id).update(data);
   }
+
+
+   /************************************
+   ************* ITEMS *****************/ 
+  public getItems() {
+    return this.firestore.collection('items').snapshotChanges();
+  }
+
+  public addItem(data){
+   return this.firestore.collection('items').add(data);
+  }
+
+  public getItem(id){
+    return this.firestore.collection('items').doc(id).snapshotChanges();    
+  }
+
+  public updateItem(id, data){
+    return this.firestore.collection('items').doc(id).update(data);
+  }
+
+  public deleteItem(id){
+   return this.firestore.collection('items').doc(id).delete();
+  }
+
+
+
 
 
 

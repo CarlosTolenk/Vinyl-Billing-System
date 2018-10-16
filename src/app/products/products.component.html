@@ -1,1 +1,22 @@
-<app-vinils-products></app-vinils-products>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Inventory</h3>
+        <!-- <h6 class="card-subtitle">This is basic Default pagination</h6> -->
+        <ngb-tabset>
+          <ngb-tab title="Items">
+            <ng-template ngbTabContent>
+              <app-items-products></app-items-products>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Vinils" >
+            <ng-template ngbTabContent>
+              <app-vinils-products></app-vinils-products>            
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>        
+      </div>
+    </div>
+  </div> 
+</div>
