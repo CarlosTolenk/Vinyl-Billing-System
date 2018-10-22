@@ -1,0 +1,146 @@
+.board-inner{    
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+   
+}
+
+/* Step 0 */
+
+.step-zero{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10; 
+}
+/* Progress */ 
+.step-zero::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width:0%; height:5px; background: rgb(85, 119, 168);
+    z-index: -1;
+}
+
+.step-zero::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 4rem;
+    width:90%; height:5px; background: #F4F6F9;
+    z-index: -1;
+}
+
+/* Step 1 */
+
+.step-first{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+}
+/* Progress */ 
+.step-first::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 4rem;
+    z-index: -1;
+    width:25%; height:5px; background:  rgba(52, 214, 79, 0.835);
+  
+}
+
+.step-first::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 4rem;
+    width:90%; height:5px; background: #F4F6F9;
+    z-index: -1;
+}
+
+/* Step 2 */
+
+.step-second{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+}
+/* Progress */ 
+.step-second::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 4rem;
+    z-index: -1;
+    width:42%; height:5px; background:  rgba(52, 214, 79, 0.835);
+  
+}
+
+.step-second::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 4rem;
+    width:90%; height:5px; background: #F4F6F9;
+    z-index: -1;
+}
+
+
+
+
+
+/* Complete Step */
+
+.complete{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    background-color: rgb(44, 180, 67);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Inactive Step */
+
+.inactive{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    background-color: rgb(190, 192, 194);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    /* position: relative; */
+}
+
+/* Active Step */
+
+.inactive .active{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    background-color: rgb(44, 112, 180);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.round-tabs i{
+    color: azure;
+    font-size: 1.5rem
+}

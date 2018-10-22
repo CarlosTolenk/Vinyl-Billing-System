@@ -16,38 +16,39 @@
                         <h5>Mobil</h5>
                         <h5>Email</h5>
                         <h5>Company</h5> -->
-                    <form class="form-material m-t-40"  #formModalItem="ngForm">
+                    <form class="form-material m-t-40"  #formBasicInformation="ngForm">
                         <div class="row basic-info">  
                             <div class="col-md-4" >                                                
                                 <div class="form-group modal-form" >   
-                                    <label class="label-title" for="detail-name">* Full Name:</label>                      
-                                    <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" >
+                                    <label class="label-title" for="fullname">* Full Name:</label>                      
+                                    <input type="text" class="form-control m-b-0" id="fullname" #fullname="ngModel" required  name="fullname" [(ngModel)]="basicInformation.fullName" >
+                                    <!-- <div class="alert alert-danger" [hidden]="fullname.valid">First Name is required</div> -->
                                 </div>                      
                             </div>                        
                             <div class="col-md-4"  >                                                
                                 <div class="form-group modal-form" >   
-                                    <label class="label-title" for="detail-name">* Address:</label>                      
-                                    <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" >
+                                    <label class="label-title" for="address">* Address:</label>                      
+                                    <input type="text" class="form-control m-b-0" id="address" #address="ngModel" required  name="fullname" [(ngModel)]="basicInformation.address" >
                                 </div>                      
                             </div> 
                             <div class="col-md-2"  >                                                
                                 <div class="form-group modal-form" >   
-                                    <label class="label-title" for="detail-name"> Phone:</label>                      
-                                    <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" >
+                                    <label class="label-title" for="phone"> Phone:</label>                      
+                                    <input type="text" class="form-control m-b-0" id="phone" #phone="ngModel"  name="phone" [(ngModel)]="basicInformation.phone"  >
                                 </div>                      
                              </div> 
                              <div class="col-md-2"  >                                                
                                 <div class="form-group modal-form" >   
-                                    <label class="label-title" for="detail-name"> Mobile:</label>                      
-                                    <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" >
+                                    <label class="label-title" for="mobile"> Mobile:</label>                      
+                                    <input type="text" class="form-control m-b-0" id="mobile" #mobile="ngModel"  name="mobile" [(ngModel)]="basicInformation.mobile" >
                                 </div>                      
                               </div>   
                               <div class="col-md-4" >     
                                   <div class="row">
                                       <div class="col-md-9">
                                             <div class="form-group modal-form" >   
-                                                <label class="label-title" for="detail-name">* Email Address:</label>                      
-                                                <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" >
+                                                <label class="label-title" for="email">* Email Address:</label>                      
+                                                <input type="email" class="form-control m-b-0" id="email" #email="ngModel" required  name="email" [(ngModel)]="basicInformation.email">
                                             </div>    
                                       </div>
                                  </div>            
@@ -57,8 +58,9 @@
                                   <div class="row">
                                       <div class="col-md-9">
                                             <div class="form-group modal-form" >   
-                                                <label class="label-title" for="detail-name"> Company Name:</label>                      
-                                                <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" >
+                                                <label class="label-title" for="companyName"> Company Name:</label>                      
+                                                <input type="text" class="form-control m-b-0" id="companyName" #companyName="ngModel"  name="companyName" [(ngModel)]="basicInformation.companyName" >
+                                  
                                             </div>    
                                       </div>
                                   </div>            
@@ -66,14 +68,14 @@
 
                                <div class="col-md-3" >                                                
                                     <div class="form-group modal-form" >   
-                                        <label class="label-title" for="detail-name">Position in the Company:</label>                      
-                                        <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" >
+                                        <label class="label-title" for="positionCompany">Position in the Company:</label>                      
+                                        <input type="text" class="form-control m-b-0" id="positionCompany" #positionCompany="ngModel"  name="positionCompany" [(ngModel)]="basicInformation.positionCompany"  >
                                     </div>                      
                                </div>                      
                         </div>
                         <div class="row btn-next">
                             <div class="col-lg-2 col-md-4">
-                                <button type="button" class="btn btn-block btn-outline-info" (click)="GoNextStep()">Next</button>
+                                <button type="button" class="btn btn-block btn-outline-info" [disabled]="!formBasicInformation.valid" (click)="GoNextStep(formBasicInformation)">Next</button>
                             </div>
                         </div>                    
                     </form>

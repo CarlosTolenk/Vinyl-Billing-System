@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AjustesService } from '../services/ajustes.service';
 import { FormGroup, FormControl } from '@angular/forms';
+
+//Services
+import { FormDataBillingService } from '../services/form-data-billing.service';
 
 @Component({
   selector: 'app-invoicing',
@@ -10,11 +13,15 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./invoicing-fac.component.css']
 })
 export class InvoicingComponent implements OnInit {
+  @Input() formData;
 
-  constructor( )
+  constructor(private formDataService: FormDataBillingService)
   {}
+ß
+  ngOnInit() {
+    this.formData = this.formDataService.getFormData();
 
-  ngOnInit() { }
+   }
 
 
 

@@ -1,0 +1,69 @@
+<div class="board-inner shadow" id="status-buttons">
+    <ul [ngClass]="progressStatus">
+        <!-- <div class="liner"></div> -->
+                    
+        <!-- circular Personal icon -->
+        <li class="nav-item" [className]="statusStep">
+            <a class="nav-link" routerLink="/billing/basic-information" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-toggle="tab" title="personal">
+                <span class="round-tabs one">
+                    <i class="fa fa-address-card"></i>
+                </span>
+            </a>
+        </li>
+
+        <!-- circular Vinil icon -->
+         <li class="nav-item"[ngClass]="progress.second ? statusStep : 'inactive'">
+            <a class="nav-link" routerLink="/billing/vinil-information" routerLinkActive="active" data-toggle="tab" title="work">
+                <span class="round-tabs two">
+                    <i class="fa fa-cut"></i>
+                </span> 
+            </a>
+        </li>
+
+        <!-- circular Design icon -->
+        <li class="nav-item inactive">
+            <a class="nav-link"  routerLink="/billing/desing-information" routerLinkActive="active" data-toggle="tab" title="address">    
+                <span class="round-tabs three">
+                    <i class="fa fa-pencil"></i>             
+                </span>
+            </a>
+        </li>
+
+        <!-- circular Item icon -->
+        <li class="nav-item inactive">
+            <a class="nav-link"  routerLink="/billing/item-information" routerLinkActive="active" data-toggle="tab" title="completed">
+                <span class="round-tabs four">
+                    <i class="fa fa-shopping-cart"></i>
+                </span>
+            </a>
+        </li>
+           <!-- circular Result icon -->
+        <li class="nav-item inactive">
+            <a  class="nav-link"  routerLink="/billing/result-information" routerLinkActive="active" data-toggle="tab" title="completed">
+                <span class="round-tabs five">
+                    <i class="fa fa-check"></i>
+                </span>
+            </a>
+        </li>
+                
+    </ul>
+
+</div>
+
+<!-- <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </li>
+  </ul> -->
+
+
+

@@ -1,2 +1,227 @@
-<h3>Vinil Information</h3>
-<button type="button" class="btn btn-block btn-outline-info" (click)="goPrevStep()">Prev</button>
+<div class="row">
+    <div class="col-md-12">
+         <div class="card shadow">
+             <div class="card-body">         
+                <h3 class="card-title m-b-5">
+                    <span class="lstick"></span>Vinil Information                     
+                </h3>
+                <h6 class="card-subtitle">Select The Necessary Vinyl</h6>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="selection-vinil">
+                            <h5 class="selection-vinil-text">You Need To Include Vinyl?</h5>
+                            <label class="material-checkbox" for="vinilSelected">Yes
+                                <input #vinilSelected id="vinilSelected" type="checkbox" [checked]="withVinil" 
+                                (change)="onWithVinilSelectedChanged(vinilSelected.checked)" />                        
+                            </label>        
+                            <label class="material-checkbox" for="novinilSelected">Not
+                                <input #novinilSelected id="novinilSelected" type="checkbox" [checked]="withoutVinil" 
+                                (change)="onWithoutVinilSelectedChanged(novinilSelected.checked)" />                        
+                            </label>                          
+                            <!-- <pre *ngIf="withVinil">{{ vinils  | async | json}}</pre> -->
+                          
+                        </div>
+                        <div class="row" *ngIf="withVinil">
+                            <div class="col-lg-6 selection-vinil">
+                                <h5 class="selection-vinil-text">You will use application vinyl?</h5>
+                                <label class="material-checkbox" for="vinilAplication">Yes
+                                    <input #vinilAplication id="vinilAplication" type="checkbox" [checked]="VinilAplication" 
+                                    (change)="onVinilAplicationChanged(vinilAplication.checked)" />                        
+                                </label>  
+                                <!-- <form name="myForm">
+                                    <label for="singleSelect">Select Some Vinyl </label><br>
+                                    <select [(ngModel)]="selectedValue">
+                                        <option *ngFor="let item of vinils | async" value="item.id">{{item.name}}</option>
+                                    </select>`
+                                </form> -->
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="withVinil">
+                            <div class="col-lg-12">
+                                <div class="add-vinil">
+                                    <button type="button" class="btn btn-info btn-rounded" (click)="ModalAddOverhead(contentAdd)">
+                                        <i class="fa fa-plus"></i> Add
+                                     </button>
+                                </div>                                 
+                            </div>
+                        </div>                     
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="addVinil.length > 0">
+                    <div class="col-12">
+                        <h4>Vinils</h4>
+                            <table class="table table-bordered " *ngIf="addVinil">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Dimensions</th>
+                                        <th scope="col">Quantity</th>                                        
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Delete</th>
+                                     
+
+
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let item of addVinil; let i=index">
+                                        <th>{{i+1}}</th>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.dimension.width}}x{{item.dimension.heigth}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{item.price | currency:'USD'}}</td>
+                                        <td scope="row">                                          
+                                            <button type="button" (click)="deteleVinil(i)" class="btn btn-danger btn-circle">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>                                       
+                                      </tr>                                
+                                    </tbody>
+                                  </table>
+                                  
+                         <!-- <pre>{{ addVinil   | json}}</pre> -->
+                    </div>
+                </div>
+                <div class="row" *ngIf="addTape && VinilAplication">
+                    <div class="col-12">
+                            <h4>Tape</h4>
+                            <table class="table table-bordered " >
+                                    <thead>
+                                      <tr>                                  
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Dimensions</th>
+                                        <th scope="col">Quantity</th>   
+                                        <th scope="col">Area</th>                                        
+                                        <th scope="col">Price</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>                               
+                                        <td>{{addTape.name}}</td>
+                                        <td>{{addTape.description}}</td>
+                                        <td>{{addTape.width}}x{{addTape.heigth}}</td>
+                                        <td>{{addTape.quantity}}</td>                                       
+                                       
+                                        <td>{{addTape.area}} in ˆ2 </td>
+                                        <td>{{addTape.price | currency:'USD'}}</td>
+                                       
+                                      </tr>                                
+                                    </tbody>
+                                  </table>
+                                  
+                         <!-- <pre>{{ addVinil   | json}}</pre> -->
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="card-footer">       
+                <button type="button" class="btn btn-outline-info" (click)="goPrevStep()">Prev Step</button>        
+                <button type="button" class="btn btn-outline-info" [disabled]="(!withoutVinil && !addVinil.length)" (click)="goNextStep()">Next Step</button>      
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- **************************************** -->
+  <!-- *************** MODALS *****************-->
+  <!-- **************************************** -->
+  
+    <!-- ViewModalAdd Vinil-->
+
+
+            <ng-template #contentAdd let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title title-modal-plan">Add Vinil For Use <span class="title-modal"></span></h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body col-lg-12 ">        
+                    <form class="form-material m-t-40"  #formModalItem="ngForm" >
+                        <!-- <div class="col-sm-10" >                                                
+                            <div class="form-group modal-form" >   
+                                <label class="label-title" for="detail-name">Name:</label>                      
+                                <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" [(ngModel)]="addItem.name" >
+                            </div>                      
+                        </div>     -->
+                        <label for="singleSelect">Select Some Vinyl </label><br>
+
+                        <!-- <select [(ngModel)]="selectedValue">
+                            <option *ngFor="let item of vinils | async" value="item.id">{{item.name}}</option>
+                        </select> -->
+                        <div class="select">
+                            <select class="select-text"  name="selectedValue" [(ngModel)]="selectedValue" aria-placeholder="Choose a Type of Item">
+                                <option value="" disabled selected></option>
+                                <option *ngFor="let item of vinils | async" [ngValue]="item">
+                                        {{ item.color }}
+                                    </option>
+                            </select>
+                            <span class="select-highlight"></span>
+                            <span class="select-bar"></span>
+                            <label class="select-label">Choose a Color of Vinil</label>
+                        </div>
+
+                        <div class="description-vinil" *ngIf="selectedValue">
+                            <h5>Name: <span>{{selectedValue.name}}</span></h5>
+                            <h5>Description: <span>{{selectedValue.description}}</span></h5>
+                        </div>
+
+                        <div class="digit-size" *ngIf="selectedValue">
+                            <!-- <div class="col-lg-10" >                                                
+                                <div class="form-group modal-form" >   
+                                    <label class="label-title" for="detail-name">Description:</label>                      
+                                    <input type="text" id="detail-description" class="form-control m-b-0" name="detail-description" [(ngModel)]="addItem.description"   >
+                                </div>                      
+                            </div>   
+                            <div class="col-sm-10" >                                                
+                                <div class="form-group modal-form" >   
+                                    <label class="label-title" for="detail-name">Cost:</label>                      
+                                    <input type="number" id="detail-cost" class="form-control m-b-0" name="detail-cost" [(ngModel)]="addItem.cost">
+                                </div>                      
+                            </div>      
+                            <div class="col-sm-10" >                                                
+                                <div class="form-group modal-form" >   
+                                    <label class="label-title" for="detail-name">Color:</label>                      
+                                    <input type="text" id="detail-cost" class="form-control m-b-0" name="detail-cost" [(ngModel)]="addItem.color">
+                                </div>                      
+                            </div>   -->
+                            <div class="col-sm-10" >                                                
+                                <div class="form-group modal-form" >   
+                                    <label class="label-title" for="detail-width">Width:</label>                      
+                                    <input type="number" id="detail-width" class="form-control m-b-0" name="detail-width" [(ngModel)]="addItem.dimension.width">
+                                </div>                      
+                            </div>          
+                            <div class="col-sm-10" >                                                
+                                <div class="form-group modal-form" >   
+                                    <label class="label-title" for="detail-heigth">Heigth:</label>                      
+                                    <input type="number" id="detail-heigth" class="form-control m-b-0" name="detail-heigth" [(ngModel)]="addItem.dimension.heigth">
+                                </div>                      
+                            </div>  
+                            <div class="col-sm-10" >                                                
+                                    <div class="form-group modal-form" >   
+                                        <label class="label-title" for="detail-quantity">Quantity:</label>                      
+                                        <input type="number" id="detail-quantity" class="form-control m-b-0" name="detail-quantity" [(ngModel)]="addItem.quantity">
+                                    </div>                      
+                                </div>  
+                         </div>   
+                    </form>   
+                </div>
+                <div class="modal-footer-s">
+                
+                    <div class="group-button">
+                        <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+                        <button type="button" class="btn btn-info" (click)="[ c('Close click'), addVinils()]">Add</button>   
+                    </div>   
+        
+                </div>
+            </ng-template>                
+
+
+
+
+

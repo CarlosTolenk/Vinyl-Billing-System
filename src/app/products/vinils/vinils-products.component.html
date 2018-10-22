@@ -45,10 +45,10 @@
                                               {{item.color}}
                                             </td>
                                             <td class="table-col-1">
-                                              ${{item.cost}}
+                                              {{item.cost | currency:'USD'}}
                                             </td>
                                             <td class="table-col-1">
-                                              {{item.gain_per_inch}}
+                                              ${{item.gain_per_inch}}
                                             </td>
                                             <td class="table-col-2">
                                                 <button type="button" (click)="ModalEditVinil(contentEdit, item)" class="btn btn-success btn-circle">
