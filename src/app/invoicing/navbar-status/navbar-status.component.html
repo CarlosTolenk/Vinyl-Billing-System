@@ -12,7 +12,7 @@
         </li>
 
         <!-- circular Vinil icon -->
-         <li class="nav-item"[ngClass]="progress.second ? statusStep : 'inactive'">
+         <li class="nav-item" [ngClass]="progress.second ? statusStep : 'inactive'">
             <a class="nav-link" routerLink="/billing/vinil-information" routerLinkActive="active" data-toggle="tab" title="work">
                 <span class="round-tabs two">
                     <i class="fa fa-cut"></i>
@@ -21,7 +21,7 @@
         </li>
 
         <!-- circular Design icon -->
-        <li class="nav-item inactive">
+        <li class="nav-item" [ngClass]="progress.third ? statusStep : 'inactive'">
             <a class="nav-link"  routerLink="/billing/desing-information" routerLinkActive="active" data-toggle="tab" title="address">    
                 <span class="round-tabs three">
                     <i class="fa fa-pencil"></i>             

@@ -1,1 +1,115 @@
-<h2>Design Information</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-body">         
+                <h3 class="card-title m-b-5">
+                    <span class="lstick"></span>Design Information                     
+                </h3>
+                <h6 class="card-subtitle">Add the type of design</h6>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="selection-vinil">
+                            <h5 class="selection-vinil-text">Do you need to include a desing in the invoice?</h5>
+                            <label class="material-checkbox" for="designSelected">Yes
+                                <input #designSelected id="designSelected" type="checkbox" [checked]="withDesign" 
+                                (change)="onWithDesignSelectedChanged(designSelected.checked)" />                        
+                            </label>        
+                            <label class="material-checkbox" for="noDesignSelected">Not
+                                <input #noDesignSelected id="noDesignSelected" type="checkbox" [checked]="withoutDesign" 
+                                (change)="onWithoutDesignSelectedChanged(noDesignSelected.checked)" />                        
+                            </label>   
+                        </div>
+                        <div class="row" *ngIf="withDesign">
+                            <div class="col-lg-12">
+                                <div class="add-vinil">
+                                    <button type="button" class="btn btn-info btn-rounded" (click)="ModalAddDesign(contentAdd)">
+                                        <i class="fa fa-plus"></i> Add
+                                    </button>
+                                </div>                                 
+                            </div>
+                        </div>  
+                        <div class="row">
+                            <div class="col-lg-12">
+                                 <table class="table table-bordered" *ngIf="addDesing.length > 0 && !withoutDesign">
+                                    <thead>
+                                        <tr>                                  
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Time</th>                                                                         
+                                        <th scope="col">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of addDesing">                               
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.description}}</td>
+                                        <td>{{item.hour}}h {{item.minute}}m</td>                                  
+                                        <td>{{item.price | currency:'USD'}}</td>                                        
+                                        </tr>                                
+                                    </tbody>
+                                </table>    
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+             </div>
+            <div class="card-footer">       
+                <button type="button" class="btn btn-outline-info" (click)="goPrevStep()">Prev Step</button>        
+                <button type="button" class="btn btn-outline-info" [disabled]="!withoutDesign && addDesing.length == 0  " (click)="goNextStep()">Next Step</button>      
+            </div>
+         </div>
+    </div>
+</div>
+
+
+ <!-- **************************************** -->
+ <!-- [disabled]="!withoutDesign || addDesing.length != 0  " -->
+  <!-- *************** MODALS *****************-->
+  <!-- **************************************** -->
+  
+<!-- ViewModalAdd Vinil-->
+<ng-template #contentAdd let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title title-modal-plan">Add the type of design <span class="title-modal"></span></h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body col-lg-12 ">        
+            <form class="form-material m-t-40"  #formModalItem="ngForm" >  
+                <div class="digit-size">
+                    <div class="col-lg-10" >                                                
+                        <div class="form-group modal-form" >   
+                            <label class="label-title" for="detail-name">Name:</label>                      
+                            <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" [(ngModel)]="addDesignModal.name"   >
+                        </div>                      
+                    </div>  
+                    <div class="col-lg-10" >                                                
+                        <div class="form-group modal-form" >   
+                            <label class="label-title" for="detail-description">Description:</label>                      
+                            <input type="text" id="detail-description" class="form-control m-b-0" name="detail-description" [(ngModel)]="addDesignModal.description"   >
+                        </div>                      
+                    </div>   
+                    <div class="col-sm-10" >                                                
+                        <div class="form-group modal-form" >   
+                            <label class="label-title" for="detail-hour">Hour:</label>                      
+                            <input type="number" id="detail-hour" class="form-control m-b-0" name="detail-hour" [(ngModel)]="addDesignModal.hour">
+                        </div>                      
+                    </div>
+                    <div class="col-sm-10" >                                                
+                        <div class="form-group modal-form" >   
+                            <label class="label-title" for="detail-minute">Minute:</label>                      
+                            <input type="number" id="detail-minute" class="form-control m-b-0" name="detail-minute" [(ngModel)]="addDesignModal.minute">
+                        </div>                      
+                    </div>
+                </div>   
+            </form>   
+        </div>
+        <div class="modal-footer-s">    
+            <div class="group-button">
+                <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+                <button type="button" class="btn btn-info" (click)="[ c('Close click'), addDesignItem()]">Add</button>   
+            </div>   
+        </div>
+    </ng-template>                
+    

@@ -8,6 +8,7 @@ export class FormData {
     positionCompany: string = '';
     vinil:Array<any> = [];
     tape:Array<any> = [];
+    design:Array<any> = [];
 
     clear(){
         this.fullName = '';
@@ -17,6 +18,9 @@ export class FormData {
         this.email = '';
         this.companyName = '';
         this.positionCompany = '';
+        this.vinil = [];
+        this.tape = [];
+        this.design = [];
     }
 
 }
@@ -49,5 +53,12 @@ export class TapeInformation{
     description: string = '';
     area:number;
     price:number;
+}
 
+export class DesingInformation{
+    name: string = '';
+    description: string = '';
+    hour:number;
+    minute:number;
+    price:number;
 }

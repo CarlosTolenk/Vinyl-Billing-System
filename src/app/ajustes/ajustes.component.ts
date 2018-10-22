@@ -81,7 +81,7 @@ export class AjustesComponent implements OnInit, DoCheck {
 
   calPerHour(){
     let percent = (this.ganancia_hour/100) + 1;
-    this.percentPerHour = ((this.totalOverheadInd  / 240)* percent).toFixed(2);
+    this.percentPerHour = ((this.totalOverheadInd  / 200)* percent).toFixed(2);
   }
 
   onSubmiteGain(){   
@@ -89,7 +89,8 @@ export class AjustesComponent implements OnInit, DoCheck {
       ganancia_vinil: this.ganancia_vinil,
       ganancia_hour: this.ganancia_hour,
       ganancia_avg: this.ganancia_avg,
-      ganancia_overhead: this.ganancia_overhead
+      ganancia_overhead: this.ganancia_overhead,
+      work_hour: this.percentPerHour,
     });
   }
  

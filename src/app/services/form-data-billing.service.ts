@@ -43,9 +43,7 @@ export class FormDataBillingService {
 
   getVinilInformation(){
     //Return the Vinil Information
-
-      let vinilInformation = this.formData.vinil
-
+    let vinilInformation = this.formData.vinil;
     return vinilInformation;
   }
 
@@ -54,6 +52,18 @@ export class FormDataBillingService {
    this.isVinilFormValid = true;
    this.formData.vinil = vinil;
    this.formData.tape = tape;
+  }
+
+  getDesignInformation(){
+    //Return the Vinil Information
+    let designInformation = this.formData.design;
+    return designInformation;
+  }
+
+  setDesignInformation(design){
+   // Update the Personal data only when the Vinil Form had been validated successfully
+   this.isDesignFormValid = true;
+   this.formData.design = design;
   }
 
   getFormData(): FormData{

@@ -9,10 +9,9 @@ import { map, max } from 'rxjs/operators';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Services
-import { AjustesService } from '../../services/ajustes.service';
 import { ProductsService } from '../../services/products.service';
 import { FormDataBillingService } from '../../services/form-data-billing.service';
-import { async } from 'q';
+
 
 
 @Component({
@@ -41,7 +40,6 @@ export class VinilInformationComponent implements OnInit, DoCheck {
     private _location: Location,
     private _route: ActivatedRoute,
     private router: Router,
-    private _ajustesService: AjustesService,
     private _productsServices: ProductsService,
     private modalService: NgbModal,
     private formDataService: FormDataBillingService
@@ -76,7 +74,7 @@ export class VinilInformationComponent implements OnInit, DoCheck {
     let index = this.addVinil.length; 
     if(this.VinilAplication){
       // this.changeApl = this.addVinil.length;
-      if(index > this.changeIndex){
+      if(index != this.changeIndex){
         this.changeTapeApp = true;
         if(this.changeTapeApp){
           // console.log('Activado para hacer el papel de vinil');
@@ -265,44 +263,19 @@ export class VinilInformationComponent implements OnInit, DoCheck {
       this.addVinil.splice(i, i+1);
     }else{
       this.addVinil.splice(i, i);
-    }   
-
-      this.calAreaPriceTape().then((resolve) => {
-        if(resolve){         
-          console.log(this.addTape);      
-          // this.addTape.width = (this.addTape.width + 2).toFixed(2);
-          // this.addTape.area = this.addTape.width * this.addTape.heigth * this.addTape.quantity;
-          // if(this.addTape.area < 100){
-          //   this.addTape.price = (this.addTape.area * this.addTape.gain_per_inch * 25).toFixed(2);
-          // }
-          // if(this.addTape.area > 100 && this.addTape.area < 1000){
-          //   this.addTape.price = (this.addTape.area * this.addTape.gain_per_inch * 15).toFixed(2);
-          // }
-
-          // if(this.addTape.area >= 1000){
-          //   this.addTape.price = (this.addTape.area * this.addTape.gain_per_inch * 5).toFixed(2);
-          // }
-        
-          // console.log(this.addTape);
-        }
-      })
-      .catch((error) =>{
-        console.log(error);
-        // console.log("EWrrroo");
-      })  
-      this.changeIndex = this.addVinil.length;
-      this.changeTapeApp = false;     
-  
+    }
   }
-
-
 
   savaData(): boolean {
     // if(){
     //   return false;
     // }
-
-    this.formDataService.setVinilInformation(this.addVinil, this.addTape);
+    if(this.addTape.length != 0 ){
+      this.formDataService.setVinilInformation(this.addVinil, this.addTape);
+    }else{
+      this.formDataService.setVinilInformation(this.addVinil, []);
+    }
+   
     // console.log(this.basicInformation);
     return true;
   }
@@ -321,10 +294,12 @@ export class VinilInformationComponent implements OnInit, DoCheck {
 
   public onWithVinilSelectedChanged(value:boolean){
     this.withVinil = value;
+    this.withoutVinil = !value;
   }
 
   public onWithoutVinilSelectedChanged(value:boolean){
     this.withoutVinil = value;
+    this.withVinil = !value;
   }
   public onVinilAplicationChanged(value:boolean){
     this.VinilAplication = value;
