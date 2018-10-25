@@ -1,1 +1,145 @@
-<h2>Item Information</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-body">         
+                <h3 class="card-title m-b-5">
+                    <span class="lstick"></span>Item Information                     
+                </h3>
+                <h6 class="card-subtitle">Add the items for the transfer</h6>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="selection-vinil">
+                            <h5 class="selection-vinil-text">Do you need to include a item in the invoice?</h5>
+                            <label class="material-checkbox" for="designSelected">Yes
+                                <input #designSelected id="designSelected" type="checkbox" [checked]="withDesign" 
+                                (change)="onWithDesignSelectedChanged(designSelected.checked)" />                        
+                            </label>        
+                            <label class="material-checkbox" for="noDesignSelected">Not
+                                <input #noDesignSelected id="noDesignSelected" type="checkbox" [checked]="withoutDesign" 
+                                (change)="onWithoutDesignSelectedChanged(noDesignSelected.checked)" />                        
+                            </label>   
+                        </div>
+                        <div class="row" *ngIf="withDesign">
+                            <div class="col-lg-12">
+                                <div class="add-vinil">
+                                    <button type="button" class="btn btn-info btn-rounded" (click)="ModalAddItem(contentAdd)">
+                                        <i class="fa fa-plus"></i> Add
+                                    </button>
+                                </div>                                 
+                            </div>
+                        </div>  
+                        <div class="row">
+                            <div class="col-lg-12">
+                                 <table class="table table-bordered" *ngIf="addItem.length > 0 && !withoutDesign">
+                                    <thead>
+                                        <tr>                                  
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Price c/u</th>
+                                        <th scope="col">Quality</th>                                                                         
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of addItem; let i=index">                                                          
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.description}}</td>
+                                        <td>{{item.cost | currency:'USD'}}</td>
+                                        <td>{{item.quantity}}</td>                                  
+                                        <td>{{item.price | currency:'USD'}}</td>   
+                                        <td scope="row">                                          
+                                            <button type="button" (click)="deteleItem(i)" class="btn btn-danger btn-circle">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>                                                                           
+                                        </tr>                                
+                                    </tbody>
+                                </table>    
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+             </div>
+            <div class="card-footer">       
+                <button type="button" class="btn btn-outline-info" (click)="goPrevStep()">Prev Step</button>        
+                <button type="button" class="btn btn-outline-info" [disabled]="!withoutDesign  && addItem.length == 0   " (click)="goNextStep()">Next Step</button>      
+            </div>
+         </div>
+    </div>
+</div>
+
+
+
+  <!-- **************************************** -->
+  <!-- *************** MODALS *****************-->
+  <!-- **************************************** -->
+  
+<!-- ViewModalAdd Vinil-->
+<ng-template #contentAdd let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title title-modal-plan">Add Item For Use <span class="title-modal"></span></h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body col-lg-12 ">        
+        <form class="form-material m-t-40"  #formModalItem="ngForm" >
+   
+            <label for="singleSelect">Select Some Item </label><br>
+
+        
+            <div class="select">
+                <select class="select-text"  name="selectedValue" [(ngModel)]="selectedValue" aria-placeholder="Choose a Type of Item">
+                    <option value="" disabled selected></option>
+                    <option *ngFor="let item of items | async" [ngValue]="item">
+                            {{ item.name }} --  {{item.type}} -- {{item.color}}
+                    </option>
+                    <option value="Other"> Other</option>
+                </select>
+                <span class="select-highlight"></span>
+                <span class="select-bar"></span>
+                <label class="select-label">Choose a Item</label>
+            </div>
+
+            <!-- <div class="description-vinil" *ngIf="selectedValue">
+                <h5>Name: <span>{{selectedValue.name}}</span></h5>
+                <h5>Description: <span>{{selectedValue.description}}</span></h5>
+            </div> -->
+
+            <div class="digit-size" *ngIf="selectedValue">
+     
+                <div class="col-sm-10"  *ngIf="selectedValue == 'Other'" >                                                
+                    <div class="form-group modal-form" >   
+                        <label class="label-title" for="detail-name">Name:</label>                      
+                        <input type="text" id="detail-name" class="form-control m-b-0" name="detail-name" [(ngModel)]="addItemModal.name">
+                    </div>                      
+                </div>          
+                <div class="col-sm-10"  *ngIf="selectedValue == 'Other'" >                                                
+                    <div class="form-group modal-form" >   
+                        <label class="label-title" for="detail-description">Description:</label>                      
+                        <input type="text" id="detail-description" class="form-control m-b-0" name="detail-description" [(ngModel)]="addItemModal.description">
+                    </div>                      
+                </div>  
+                <div class="col-sm-10"  *ngIf="selectedValue == 'Other'">                                                
+                    <div class="form-group modal-form" >   
+                        <label class="label-title" for="detail-cost">Cost:</label>                      
+                        <input type="number" id="detail-cost" class="form-control m-b-0" name="detail-cost" [(ngModel)]="addItemModal.cost">
+                    </div>                      
+                </div>  
+                <div class="col-sm-10" >                                                
+                        <div class="form-group modal-form" >   
+                            <label class="label-title" for="detail-quantity">Quantity:</label>                      
+                            <input type="number" id="detail-quantity" class="form-control m-b-0" name="detail-quantity" [(ngModel)]="addItemModal.quantity">
+                        </div>                      
+                    </div>  
+                </div>   
+        </form>   
+    </div>
+    <div class="modal-footer-s">    
+        <div class="group-button">
+            <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+            <button type="button" class="btn btn-info" (click)="[ c('Close click'), addItems_Table()]">Add</button>   
+        </div>   
+    </div>
+</ng-template>            

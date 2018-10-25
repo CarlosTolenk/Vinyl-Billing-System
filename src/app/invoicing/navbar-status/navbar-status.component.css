@@ -124,6 +124,36 @@
     z-index: -1;
 }
 
+/*step-fouth*/
+
+/* Step 4 */
+
+.step-fourth{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+}
+/* Progress */ 
+.step-fourth::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 4rem;
+    z-index: -1;
+    width:90%; height:5px; background:  rgba(52, 214, 79, 0.835);
+  
+}
+.step-fourth::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 4rem;
+    width:90%; height:5px; background: #F4F6F9;
+    z-index: -1;
+}
+
 
 
 

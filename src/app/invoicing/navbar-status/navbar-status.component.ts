@@ -51,6 +51,12 @@ export class NavbarStatusComponent implements OnInit, DoCheck {
       this.statusStep = "complete",
       this.progressStatus = 'step-third'
     }
+
+    if(this.progress.first && this.progress.second && this.progress.third && this.progress.fourth){
+      console.log("Tercer paso listo");
+      this.statusStep = "complete",
+      this.progressStatus = 'step-fourth'
+    }
     
 
     console.log(`First: ${this.progress.first} Second: ${this.progress.second}`);
@@ -59,6 +65,7 @@ export class NavbarStatusComponent implements OnInit, DoCheck {
     
     
     // else{
+      
     //   this.statusStep = "complete",
     //   this.progressStatus = 'step-first'
     // }

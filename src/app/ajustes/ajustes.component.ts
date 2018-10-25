@@ -91,6 +91,7 @@ export class AjustesComponent implements OnInit, DoCheck {
       ganancia_avg: this.ganancia_avg,
       ganancia_overhead: this.ganancia_overhead,
       work_hour: this.percentPerHour,
+      percentOverhead: this.percentOverhead,
     });
   }
  

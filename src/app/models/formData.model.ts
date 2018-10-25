@@ -9,6 +9,10 @@ export class FormData {
     vinil:Array<any> = [];
     tape:Array<any> = [];
     design:Array<any> = [];
+    items:Array<any> = [];
+    subtotal:number = 0;
+    overhead:number = 0;
+    total:number = 0;
 
     clear(){
         this.fullName = '';
@@ -20,7 +24,10 @@ export class FormData {
         this.positionCompany = '';
         this.vinil = [];
         this.tape = [];
-        this.design = [];
+        this.items = [];
+        this.subtotal = 0;
+        this.overhead = 0;
+        this.total = 0;
     }
 
 }
@@ -60,5 +67,13 @@ export class DesingInformation{
     description: string = '';
     hour:number;
     minute:number;
+    price:number;
+}
+
+export class ItemsInformation{
+    name: string = '';
+    description: string = '';
+    cost:number;
+    quality:number;
     price:number;
 }

@@ -37,14 +37,20 @@
                                         <th scope="col">Description</th>
                                         <th scope="col">Time</th>                                                                         
                                         <th scope="col">Price</th>
+                                        <th scope="col">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of addDesing">                               
+                                        <tr *ngFor="let item of addDesing; let i=index">                               
                                         <td>{{item.name}}</td>
                                         <td>{{item.description}}</td>
                                         <td>{{item.hour}}h {{item.minute}}m</td>                                  
-                                        <td>{{item.price | currency:'USD'}}</td>                                        
+                                        <td>{{item.price | currency:'USD'}}</td>      
+                                        <td scope="row">                                          
+                                            <button type="button" (click)="deteleItem(i)" class="btn btn-danger btn-circle">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                            </td>                                     
                                         </tr>                                
                                     </tbody>
                                 </table>    

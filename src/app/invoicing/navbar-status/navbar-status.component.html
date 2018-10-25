@@ -30,7 +30,7 @@
         </li>
 
         <!-- circular Item icon -->
-        <li class="nav-item inactive">
+        <li class="nav-item" [ngClass]="progress.fourth ? statusStep : 'inactive'">
             <a class="nav-link"  routerLink="/billing/item-information" routerLinkActive="active" data-toggle="tab" title="completed">
                 <span class="round-tabs four">
                     <i class="fa fa-shopping-cart"></i>

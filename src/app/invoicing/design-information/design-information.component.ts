@@ -97,6 +97,10 @@ export class DesignInformationComponent implements OnInit {
     this.addDesing.push(this.addDesignModal);
   }
 
+  deteleItem(i){     
+    this.addDesing.splice(i,i+1); 
+   }
+
   ModalAddDesign(content){ 
     this.addDesignModal = {   
       name: '',
