@@ -41,6 +41,8 @@ export class ItemInformationComponent implements OnInit {
   {}
 
   ngOnInit() {
+    this.addItem = this.formDataService.getItemsInformation();
+
     this.items = this._productsServices.getItems().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as any;      

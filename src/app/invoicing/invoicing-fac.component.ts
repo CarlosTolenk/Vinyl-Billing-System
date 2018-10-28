@@ -13,14 +13,13 @@ import { FormDataBillingService } from '../services/form-data-billing.service';
   styleUrls: ['./invoicing-fac.component.css']
 })
 export class InvoicingComponent implements OnInit {
-  @Input() formData;
+  
 
   constructor(private formDataService: FormDataBillingService)
   {}
-ß
-  ngOnInit() {
-    this.formData = this.formDataService.getFormData();
 
+  ngOnInit() {
+    // this.formData = this.formDataService.getFormData();
    }
 
 

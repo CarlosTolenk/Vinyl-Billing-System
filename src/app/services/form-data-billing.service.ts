@@ -27,8 +27,9 @@ export class FormDataBillingService {
 
   getBasicInformation(): BasicInformation{
     //Return the Basic Information
+ 
     let basicInformation = {
-      fullName: this.formData.fullName,
+      fullName: this.formData.fullName,      
       address: this.formData.address,
       phone: this.formData.phone,
       mobile: this.formData.mobile,
@@ -40,10 +41,10 @@ export class FormDataBillingService {
   }
 
   setBasicInformation(data: BasicInformation){
-    // Update the Personal data only when the Personal Form had been validated successfully
+    // Update the Personal data only when the Personal Form had been validated successfully  
     this.isBasicFormValid = true;
     this.formData.fullName = data.fullName;
-    this.formData.address = data.address;
+    this.formData.address = data.address; 
     this.formData.phone = data.phone;
     this.formData.mobile = data.mobile;
     this.formData.email = data.email;
@@ -80,16 +81,33 @@ export class FormDataBillingService {
   }
 
   getItemsInformation(){
-    //Return the Vinil Information
-    let itemsInformation = this.formData.items;
+    //Return the Vinil Information 
+    let itemsInformation = this.formData.items;   
     return itemsInformation;
   }
 
   setItemsInformation(items){
     //Return the Vinil Information
+    this.generateRef();
     this.isItemFormValid = true;
     this.formData.items = items;
     this.CalSubTotal(items);
+  }
+
+  generateRef(){
+    let fulldate = new Date();
+    let date =  `${fulldate.getMonth()+1}-${fulldate.getDate()}-${fulldate.getFullYear()}`;
+    var type = '00';  
+    let random = (Math.random() * (99 - 10) + 5).toFixed(0);
+
+    if(this.formData.vinil.length > 0) type = '01';
+    if(this.formData.design.length > 0) type = '02';
+    if(this.formData.vinil.length > 0 && this.formData.design.length > 0) type = '03';
+
+    this.formData.date = date;
+    this.formData.ref = `${type}-${fulldate.getMonth()+1}${fulldate.getDate()}${fulldate.getUTCFullYear() -2000}${random}`;
+    
+    
   }
 
   getFormData(): FormData{
@@ -101,12 +119,13 @@ export class FormDataBillingService {
     this.subTotal = 0;
     if(total_item.length > 0){
      for(let i=0; i<total_item.length; i++){
-        this.subTotal += total_item[i].price;
+        this.subTotal += (total_item[i].price * (1+this.overhead));
      }
     }
     this.formData.subtotal += this.subTotal;
-    this.formData.overhead =  this.formData.subtotal * this.overhead;
-    this.formData.total =  this.formData.subtotal + this.formData.overhead;
+    // this.formData.overhead =  this.formData.subtotal * this.overhead;
+    // this.formData.total =  this.formData.subtotal + this.formData.overhead;
+    this.formData.total =  this.formData.subtotal 
   }
 
   resetFormData(): FormData {

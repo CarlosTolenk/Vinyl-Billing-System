@@ -43,6 +43,8 @@ export class DesignInformationComponent implements OnInit {
   {}
 
   ngOnInit() {
+    this.addDesing = this.formDataService.getDesignInformation();
+
     this._ajustesService.getGanancia().subscribe((ganancia:any) => {
       this.workToHour = ganancia.work_hour;      
     });

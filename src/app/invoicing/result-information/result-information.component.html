@@ -1,4 +1,202 @@
-<h2>Result Information</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-body">         
+                <h3 class="card-title m-b-5">
+                    <span class="lstick"></span>Result Information                     
+                </h3>
+                <h6 class="card-subtitle">All the information of the invoice</h6>
+                <!-- <pre>{{ formData | json }}</pre> -->
+                <div class="row" id="contentToConvert">
+                    <div class="col-md-12">
+                        <div class="card card-body printableArea">
+                            <div class="header-logo" >
+                                <img src="{{img_logo_nico}}" alt="logo-printInvoice">      
+                                                      
+
+                                <h2><b>INVOICE</b></h2>
+                            </div>                        
+                            <div class="button-line"></div>
+                            <div class="row">
+                                <div class="col-md-8 no-invoice-date">                              
+                                    <div class="invoice-date-no">
+                                        <div class="no-invoice">
+                                            <p><b>Invoice no.</b></p>
+                                            <h5><b>#{{formData.ref}}</b></h5>
+                                        </div>
+                                        <div class="no-invoice">
+                                            <p><b>Date</b></p>
+                                            <h5><b>{{formData.date}}</b></h5>
+                                        </div>                                                                         
+                                    </div>
+                                    <div class="invoice-to-line">
+                                        <div class="to-invoice"><p><b>Invoice to</b></p></div>    
+                                        <div class="border-rigth"></div>    
+                                    </div>        
+                                    
+                                
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="header-fullname">
+                                        <h4 class="font-bold">{{formData.fullName}}</h4>
+                                        <h6 *ngIf="formData.positionCompany">{{formData.companyName}} - {{formData.positionCompany}}s</h6>
+                                    </div>                             
+                                </div>
+                            </div>
+                            <div class="button-line"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="header-total">                                  
+                                        <div class="total-header-perfect">                                         
+                                            <h2>TOTAL DUE:</h2>
+                                            <!-- <h1 *ngIf="discount == 0 || discount == ''"><b>US {{formData.total * (1 + taxes/100) | currency:'USD'}}</b></h1>     -->
+                                            <h1 ><b>US {{formData.total * (1 + taxes/100) - (formData.total * discount/100) | currency:'USD'}}</b></h1>                                      
+                                        </div>                                                               
+                                        <div class="address-invoice">                                                           
+                                            <p class="m-t-30"><b><i class="fa fa-map-marker"></i></b>{{formData.address}}</p>  
+                                            <p class="m-t-30"><b><i class="fa fa-phone"></i></b>{{formData.phone}} - {{formData.mobile}}</p>  
+                                            <p class="m-t-20"><b><i class="fa fa-envelope"></i></b>{{formData.email}}</p> 
+                                        </div>
+                                    </div>
+                                </div>                             
+                            </div>
+                            <div class="button-line"></div> 
+                                <div class="row">
+                              
+                                <div class="col-md-12">
+                                    <div class="table-responsive m-t-40" style="clear: both;">
+                                        <table class="table table-hover">
+                                            <thead class="bg-info">
+                                                <tr>                                                 
+                                                    <th class="text-center text-white title-tabs">Description</th>
+                                                    <th class="text-center text-white title-tabs">Time</th>
+                                                    <th class="text-center text-white title-tabs">Size</th>
+                                                    <th class="text-center text-white title-tabs">Quantity</th>                                              
+                                                    <th class="text-center text-white title-tabs">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of formData.vinil">                                                 
+                                                    <td class="text-center">{{item.name}}--{{item.description}}--{{item.color}}</td>
+                                                    <td class="text-center">-----</td>
+                                                    <td class="text-center">{{item.dimension.width}}"x{{item.dimension.heigth}}"</td>
+                                                    <td class="text-center">{{item.quantity}} </td>
+                                                    <td class="text-center">{{item.price * (1 + overhead) | currency:'USD'}} </td>                                                
+                                                </tr>
+                                                <tr *ngIf="formData.tape.area > 0">                                                  
+                                                    <td class="text-center">{{formData.tape.name}}--{{formData.tape.description}}</td>
+                                                    <td class="text-center">-----</td>
+                                                    <td class="text-center">{{formData.tape.width}}"x{{formData.tape.heigth}}"</td>
+                                                    <td class="text-center">1</td>
+                                                    <td class="text-center">{{formData.tape.price * (1 + overhead) | currency:'USD'}} </td>                                               
+                                                </tr>
+                                                <tr *ngFor="let item of formData.design">                                                 
+                                                    <td class="text-center">{{item.name}}--{{item.description}}</td>
+                                                    <td class="text-center">{{item.hour}}h:{{item.minute}}m</td>
+                                                    <td class="text-center">-----</td>
+                                                    <td class="text-center">1</td>
+                                                    <td class="text-center">{{item.price * (1 + overhead)| currency:'USD'}} </td>      
+                                                </tr>
+                                                <tr *ngFor="let item of formData.items">                                                 
+                                                    <td class="text-center">{{item.name}}--{{item.description}}--{{item.color}}</td>
+                                                    <td class="text-center">-----</td>
+                                                    <td class="text-center">-----</td>
+                                                    <td class="text-center">{{item.quantity}} </td>
+                                                    <td class="text-center">{{item.price * (1 + overhead) | currency:'USD'}} </td>      
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td class="text-center">3</td>
+                                                    <td>RC Cars</td>
+                                                    <td class="text-right"> 20 </td>
+                                                    <td class="text-right"> %600 </td>
+                                                    <td class="text-right"> $12000 </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">4</td>
+                                                    <td>Down Coat</td>
+                                                    <td class="text-right"> 60 </td>
+                                                    <td class="text-right">$5 </td>
+                                                    <td class="text-right"> $300 </td>
+                                                </tr> -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 ">
+                                    <div class="row detail-method-total">
+                                        <div class="col-3 method-grand-total">
+                                            <h2>Payment Method We Accept</h2>
+                                            <div class="button-line"></div> 
+                                            <div class="icon-method">
+                                                <p><i class="fa fa-money fa-4x"></i></p>                                          
+                                                <p><i class="fa fa-credit-card fa-4x"></i></p>
+                                                <p><i class="fa fa-cc-paypal fa-4x"></i></p>
+                                            </div>
+
+                                            <div class="accept-polity">
+                                              <h3>Term and Conditions</h3>
+                                                <ul>
+                                                    <li >Invoice is due within 15 days</li>
+                                                    <li>50% of the payment has to be done before start the job and the rest when the job is done</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="asign-asignature">
+                                                <img src="{{img_asignature_asing}}" alt="sign-asignature">         
+                                            </div>
+                                        </div>
+                                        <div class="col-3 offset-6 grand-total">
+                                            <h5><b>Sub - Total amount: {{formData.subtotal + formData.overhead | currency:'USD'}}</b></h5> 
+                                            <form class="form-material m-t-40"  #formModalItem="ngForm" >        
+                                                <div class="form-group">          
+                                                    <h5><b>Taxes(%):</b></h5>                                               
+                                                    <input type="number" id="detail-discount" class="form-control m-b-0" name="detail-discount" [(ngModel)]="taxes" >                                                        
+                                                </div>                                                                       
+                                                <div class="form-group">          
+                                                    <h5><b>Discount(%):</b></h5>                                               
+                                                    <input type="number" id="detail-discount" class="form-control m-b-0" name="detail-discount" [(ngModel)]="discount">                                                        
+                                                </div>  
+                                            </form>
+                                            <hr>
+                                            <h2 class="grand-total-number"><b>Grand Total :</b>{{formData.total * (1 + taxes/100) - (formData.total * discount/100) | currency:'USD'}}</h2>
+                                            <div class="thankYou">
+                                                <h4><b>Thank you for choosing us</b></h4>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="clearfix"></div>                                 -->
+                                       
+                                  </div>
+                               </div>
+                               <div class="button-line"></div> 
+                               <div class="row">
+                                   <div class="col-lg-12 ">
+                                        <div class="contact-details">
+                                            <div class="all-contacts-details">
+                                                <h4><b>Contact Details:</b></h4>
+                                                <div class="contact-details-items">
+                                                    <p><i class="fa fa-whatsapp"></i>(732) 484-5474</p>     
+                                                    <p><i class="fa fa-envelope"></i>info@nicomultimediap.com</p>        
+                                                </div>
+                                            </div> 
+                                            <div class="contact-logo-gray">
+                                                <img src="{{img_logo_gray}}" alt="sign-asignature">      
+                                            </div>
+                                        </div>
+                                   </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="card-footer">       
+                <button type="button" class="btn btn-outline-info" (click)="goPrevStep()">Prev Step</button>        
+                <button type="button" class="btn btn-outline-info" (click)="captureScreen()">Save Invoice</button>      
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 

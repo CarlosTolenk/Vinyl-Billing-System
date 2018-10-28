@@ -1,0 +1,325 @@
+:root {
+    --paola: 2.5rem; 
+}
+
+p{
+    font-size: var(--paola);
+}
+
+
+.header-logo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-line{
+    margin: 1.75rem 0;
+    height: 2.5px;
+    display: block;
+    width: 100%;
+    background: hsla(0, 2%, 76%, 0.897);    
+}
+
+.header-logo img{
+    width: 15%;
+    height: 25%;
+}
+
+.no-invoice-date{
+    display: flex;
+    justify-content: space-between;     
+    flex-direction: row;
+    padding: 1rem 0;
+    /* background-color: blue; */
+}
+
+.invoice-date-no{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;   
+    /* background-color: red; */
+}
+
+.invoice-date-no > * p{
+    font-size: 1.12rem;
+}
+
+.address-invoice  p {
+    font-size: 1.12rem;
+}
+
+.accept-polity{
+    padding: 1rem;
+    padding-top: .5rem;
+  margin-bottom: 50px;
+}
+
+.accept-polity ul li{
+    font-size: 1.1rem;
+}
+
+.header-fullname h4{
+    font-size: 1.35em;
+}
+.header-fullname h6{
+    font-size: 1.12em;
+}
+
+.title-tabs{
+    font-size: 1.12em;
+}
+
+.title-item{
+    font-size: 1.2em;
+}
+
+.to-invoice{
+    font-size: 1.12rem;
+}
+
+.no-invoice{
+    display: flex;
+    flex-direction: column;  
+    justify-content: center;  
+    align-items: center;
+    padding: 1rem;
+}
+
+.to-invoice{
+    margin-right: 0.75rem;
+}
+
+.invoice-to-line{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.header-fullname{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    align-self: center; 
+}
+.header-fullname:first-child{
+    margin-top: 0.25rem;
+}
+
+.method-grand-total{ 
+    padding: 1.25rem;
+    position: relative;
+    height: 550px;
+}
+
+
+.grand-total{
+    padding: 1.25rem;
+}
+
+.icon-method{
+    display: flex;
+    flex-direction: row;
+}
+
+.icon-method p {
+    padding: 0 1rem;
+}
+
+.asign-asignature{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: 2.75rem;
+}
+
+.contact-details{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around!important; */
+    min-width: 100%; 
+    /* background-color: #2F80ED; */
+}
+
+.thankYou{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.thankYou h4{
+    font-size: 1.35rem;
+} 
+
+.contact-details-items{
+    font-size: 1rem;
+
+}
+
+.all-contacts-details{
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+}
+
+.contact-details-items{
+    display: flex;
+    flex-direction: row;
+}
+
+.contact-details-items p {
+    margin-right: 0.75rem;
+}
+
+.contact-details-items p i{
+    margin-right: 0.25rem;
+}
+
+.contact-logo-gray {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-end;
+    margin-left: 15rem;
+ 
+}
+
+.detail-method-total{
+    padding-top: 2.5rem;
+}
+
+
+.contact-logo-gray img{
+    max-width: 25.5%;
+}
+.border-rigth{
+    height: 4rem;
+    display: block;
+    width: 2.5px;
+    background: #a09e9e;    
+}
+
+.header-total{
+    display: flex;
+    justify-content: space-between;  
+    align-content: center; 
+    padding: 1.15rem 0;
+}
+
+.total-header-perfect{   
+    align-self: center;
+}
+
+.total-header-perfect h1{
+    font-size: 1.6rem;
+}
+
+.total-header-perfect h2{
+    font-size: 1.3rem;
+}
+
+.grand-total > h5{
+    font-size: 1.2rem;
+} 
+
+.grand-total-number{
+    background-color: #0090F0;
+    padding: 1rem;
+    color: white;
+}
+
+
+
+.address-invoice p b i{
+   margin-right: 0.5rem;
+}
+
+
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 2rem;   
+}
+
+label {   
+    /* margin: 2rem; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    line-height: 1rem;    
+    height: 1rem;
+    background: inherit;
+}   
+
+label > * {
+ margin-left: 1rem;
+}
+
+.selection-vinil{
+    display: flex;
+    justify-content: flex-start;    
+}
+
+.selection-vinil-text{
+    margin-right: 1rem;
+}
+
+.add-vinil{
+    display: flex;
+    justify-content: flex-end;
+    padding: 1.5rem 0;
+}  
+   
+input {
+    top: -5px;
+    left: 20px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    width: 3.5rem;
+    height: 1.2rem;
+    /* margin-right: .5rem;   */
+    /* background: inherit; */
+    background: #2F80ED;
+    /* padding-left: .5rem; */
+}
+
+input:before {
+    content: "";  
+    position: absolute; 
+    width: 3.5rem;  
+    height: 1.2rem; 
+    background: inherit;
+    cursor: pointer;
+}
+
+.form-group{  
+    display: flex;
+    flex-direction: row;
+}
+
+input:after {
+    content: "";
+    transition: .2s ease-in-out;  
+    position: absolute;  
+    z-index: 1;
+    width: 1rem;   
+    height: 1rem;    
+    border: .1rem solid rgba(200, 200, 200, .3); 
+}
+
+input:checked:after {
+    transform: rotate(-45deg);
+    height: .5rem;
+    border-color: white;
+    border-top-color: transparent;  
+    border-right-color: transparent;
+
+}
+
+    
+
+
+

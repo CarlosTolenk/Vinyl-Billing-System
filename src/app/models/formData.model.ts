@@ -1,5 +1,7 @@
 export class FormData {
+    ref:string = '';
     fullName: string = '';
+    date: any;
     address: string = '';
     phone: string = '';
     mobile: string = '';
@@ -15,7 +17,9 @@ export class FormData {
     total:number = 0;
 
     clear(){
+        this.ref = '';
         this.fullName = '';
+        this.date = '';
         this.address = '';
         this.phone = '';
         this.mobile = '';
@@ -60,6 +64,8 @@ export class TapeInformation{
     description: string = '';
     area:number;
     price:number;
+    width:number;
+    height:number;
 }
 
 export class DesingInformation{
