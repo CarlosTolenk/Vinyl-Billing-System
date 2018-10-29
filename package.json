@@ -1,5 +1,5 @@
 {
-    "name": "admin-angular",
+    "name": "VinilysSystemNico",
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
@@ -15,7 +15,7 @@
     "private": true,
     "dependencies": {
         "@angular/animations": "^6.0.3",
-        "@angular/cli": "^6.0.5",
+        "@angular/cli": "^6.2.6",
         "@angular/common": "^6.0.3",
         "@angular/compiler": "^6.0.3",
         "@angular/compiler-cli": "^6.0.3",
@@ -84,5 +84,5 @@
     "engines": {
         "node": "6.11.1",
         "npm": "3.10.9"
-      }
+    }
 }
