@@ -8,8 +8,8 @@
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e", 
-        "postinstall": "ng build --aot --target=production"
+        "e2e": "ng e2e",
+        "postinstall": "ng build --aot -prod"
     },
     "private": true,
     "dependencies": {
@@ -67,6 +67,7 @@
         "@types/jquery": "^3.2.5",
         "@types/node": "~6.0.60",
         "codelyzer": "~4.2.1",
+        "enhanced-resolve": "^3.3.0",
         "jasmine-core": "~2.6.2",
         "jasmine-spec-reporter": "~4.1.0",
         "karma": "~1.7.0",
@@ -80,7 +81,7 @@
         "tslint": "~5.7.0"
     },
     "engines": {
-        "npm": "6.4.1",
-        "node": "10.10.0"
+        "node": "6.11.0",
+        "npm": "3.10.10"
     }
 }
