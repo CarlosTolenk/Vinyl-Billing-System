@@ -109,7 +109,7 @@ export class ItemsProductsComponent implements OnInit {
    this.services = this._productsServices.getItems().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as any;      
-        const id = a.payload.doc.id;     
+        const id = a.payload.doc;     
 
         return {id, ...data};
     

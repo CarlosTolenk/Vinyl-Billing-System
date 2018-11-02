@@ -60,14 +60,14 @@ export class VinilInformationComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.addVinil = this.formDataService.getVinilInformation();
-    
+        
     this.vinils = this._productsServices.getVinils().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as any;      
-        const id = a.payload.doc.id;        
-        return {id, ...data};
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        return { id, ...data };
       }))
-    );  
+    );
    }
 
   ngDoCheck(){

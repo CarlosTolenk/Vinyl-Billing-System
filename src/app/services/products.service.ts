@@ -10,7 +10,10 @@ import { fromTask } from '@angular/fire/storage';
 export class ProductsService {
 
   constructor(
-    private firestore: AngularFirestore ) { }
+    private firestore: AngularFirestore ) {
+
+      
+     }
 
 
   /************************************

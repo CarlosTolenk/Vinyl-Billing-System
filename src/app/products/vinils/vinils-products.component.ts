@@ -35,12 +35,12 @@ export class VinilsProductsComponent implements OnInit {
       this.ganancia_vinil = ganancia.ganancia_vinil;      
     });
 
-   this.vinils = this._productsServices.getVinils().pipe(
+   this.vinils = this._productsServices.getVinils().
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as any;      
-        const id = a.payload.doc.id;        
+        const id = a.payload.doc;        
         return {id, ...data};
-      }))
+      })
     );  
 
   }
